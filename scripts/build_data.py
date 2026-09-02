@@ -242,13 +242,29 @@ def validate(books, para_marker_count, source_hash, expected_hash):
                 if not isinstance(note, dict) or not note.get("text"):
                     errors.append("Malformed note in {}".format(paragraph["id"]))
 
-    book_one = books[0] if books else None
-    if book_one and book_one["translationCount"] not in (0, book_one["paragraphCount"]):
-        errors.append(
-            "Book 1 translation must be empty or complete: {}/{}".format(
-                book_one["translationCount"], book_one["paragraphCount"]
+    for book in books:
+        if book["translationCount"] not in (0, book["paragraphCount"]):
+            errors.append(
+                "Book {} translation must be empty or complete: {}/{}".format(
+                    book["book"],
+                    book["translationCount"],
+                    book["paragraphCount"],
+                )
             )
-        )
+        for paragraph in book["paragraphs"]:
+            status = paragraph["translationStatus"]
+            if status not in ("untranslated", "first-pass", "reviewed"):
+                errors.append(
+                    "Unknown translation status in {}: {}".format(
+                        paragraph["id"], status
+                    )
+                )
+            if paragraph["korean"] and status == "untranslated":
+                errors.append(
+                    "Translated paragraph marked untranslated: {}".format(
+                        paragraph["id"]
+                    )
+                )
 
     if errors:
         raise ValueError("\n".join(errors))
