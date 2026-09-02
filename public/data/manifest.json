@@ -1,0 +1,233 @@
+{
+  "work": "odyssey",
+  "workTitleGreek": "Ὀδύσσεια",
+  "workTitleKorean": "오디세이아",
+  "source": {
+    "edition": "A. T. Murray (ed.), The Odyssey, Volumes 1–2, 1919",
+    "urn": "urn:cts:greekLit:tlg0012.tlg002.perseus-grc2",
+    "repository": "https://github.com/PerseusDL/canonical-greekLit",
+    "sourceUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/d771ecb5448baeb450d3f9822036555655ca65f3/data/tlg0012/tlg002/tlg0012.tlg002.perseus-grc2.xml",
+    "sourceCommit": "d771ecb5448baeb450d3f9822036555655ca65f3",
+    "sourceSha256": "246f17cc2e9c3f4e8b97fe7d6fcf56dbc4f34f215d9b1447b2878a6152e0656a",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "stats": {
+    "books": 24,
+    "lines": 12107,
+    "paragraphs": 1186,
+    "paragraphMarkers": 1162,
+    "translatedParagraphs": 33,
+    "lineNumberGaps": {
+      "10": [
+        456
+      ],
+      "16": [
+        101
+      ],
+      "23": [
+        49
+      ]
+    }
+  },
+  "books": [
+    {
+      "book": 1,
+      "path": "data/books/01.json",
+      "lineCount": 444,
+      "paragraphCount": 33,
+      "translationCount": 33,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 2,
+      "path": "data/books/02.json",
+      "lineCount": 434,
+      "paragraphCount": 38,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 3,
+      "path": "data/books/03.json",
+      "lineCount": 497,
+      "paragraphCount": 40,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 4,
+      "path": "data/books/04.json",
+      "lineCount": 847,
+      "paragraphCount": 86,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 5,
+      "path": "data/books/05.json",
+      "lineCount": 493,
+      "paragraphCount": 40,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 6,
+      "path": "data/books/06.json",
+      "lineCount": 331,
+      "paragraphCount": 21,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 7,
+      "path": "data/books/07.json",
+      "lineCount": 347,
+      "paragraphCount": 24,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 8,
+      "path": "data/books/08.json",
+      "lineCount": 586,
+      "paragraphCount": 60,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 9,
+      "path": "data/books/09.json",
+      "lineCount": 566,
+      "paragraphCount": 48,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 10,
+      "path": "data/books/10.json",
+      "lineCount": 573,
+      "paragraphCount": 60,
+      "translationCount": 0,
+      "lineNumberGaps": [
+        456
+      ]
+    },
+    {
+      "book": 11,
+      "path": "data/books/11.json",
+      "lineCount": 640,
+      "paragraphCount": 64,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 12,
+      "path": "data/books/12.json",
+      "lineCount": 453,
+      "paragraphCount": 42,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 13,
+      "path": "data/books/13.json",
+      "lineCount": 440,
+      "paragraphCount": 42,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 14,
+      "path": "data/books/14.json",
+      "lineCount": 533,
+      "paragraphCount": 36,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 15,
+      "path": "data/books/15.json",
+      "lineCount": 557,
+      "paragraphCount": 57,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 16,
+      "path": "data/books/16.json",
+      "lineCount": 480,
+      "paragraphCount": 47,
+      "translationCount": 0,
+      "lineNumberGaps": [
+        101
+      ]
+    },
+    {
+      "book": 17,
+      "path": "data/books/17.json",
+      "lineCount": 606,
+      "paragraphCount": 76,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 18,
+      "path": "data/books/18.json",
+      "lineCount": 428,
+      "paragraphCount": 58,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 19,
+      "path": "data/books/19.json",
+      "lineCount": 604,
+      "paragraphCount": 51,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 20,
+      "path": "data/books/20.json",
+      "lineCount": 394,
+      "paragraphCount": 57,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 21,
+      "path": "data/books/21.json",
+      "lineCount": 434,
+      "paragraphCount": 49,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 22,
+      "path": "data/books/22.json",
+      "lineCount": 501,
+      "paragraphCount": 69,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    },
+    {
+      "book": 23,
+      "path": "data/books/23.json",
+      "lineCount": 371,
+      "paragraphCount": 32,
+      "translationCount": 0,
+      "lineNumberGaps": [
+        49
+      ]
+    },
+    {
+      "book": 24,
+      "path": "data/books/24.json",
+      "lineCount": 548,
+      "paragraphCount": 56,
+      "translationCount": 0,
+      "lineNumberGaps": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "work": "Homer, Odyssey",
+  "workTitleGr": "Ὀδύσσεια",
+  "workTitleKo": "오디세이아",
+  "edition": "A. T. Murray (ed.), The Odyssey, Volumes 1–2, 1919",
+  "urn": "urn:cts:greekLit:tlg0012.tlg002.perseus-grc2",
+  "repository": "https://github.com/PerseusDL/canonical-greekLit",
+  "sourceUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/d771ecb5448baeb450d3f9822036555655ca65f3/data/tlg0012/tlg002/tlg0012.tlg002.perseus-grc2.xml",
+  "sourceCommit": "d771ecb5448baeb450d3f9822036555655ca65f3",
+  "sourceSha256": "246f17cc2e9c3f4e8b97fe7d6fcf56dbc4f34f215d9b1447b2878a6152e0656a",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "localFile": "sources/raw/odyssey-perseus-grc2.xml"
+}
