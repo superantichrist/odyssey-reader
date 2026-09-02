@@ -6,10 +6,13 @@ import {
   ChevronLeft,
   ChevronRight,
   Clipboard,
+  ExternalLink,
+  LibraryBig,
   Menu,
   Minus,
   Moon,
   Plus,
+  Search,
   Sun,
 } from 'lucide-react';
 import {
@@ -90,9 +93,68 @@ type Manifest = {
     paragraphCount: number;
     translationCount: number;
   }>;
+  reference: {
+    path: string;
+    counts: Record<ReferenceKey, number>;
+  };
 };
 
 type ViewMode = 'parallel' | 'greek' | 'korean';
+type ReferenceKey = 'glossary' | 'people' | 'places' | 'textualNotes';
+
+type PassageReference = {
+  book: number;
+  line: number;
+  label?: string;
+};
+
+type ReferenceSource = {
+  label: string;
+  url: string;
+};
+
+type ReferenceEntry = {
+  id: string;
+  nameGreek?: string;
+  nameKo?: string;
+  transliteration?: string;
+  role?: string;
+  kind?: string;
+  title?: string;
+  scope?: string;
+  status?: string;
+  summary: string;
+  details?: string;
+  refs: PassageReference[];
+  sources?: ReferenceSource[];
+};
+
+type ReferenceData = {
+  schemaVersion: number;
+  source: {
+    edition: string;
+    urn: string;
+    sourceCommit: string;
+    sourceSha256: string;
+    license: string;
+    licenseUrl: string;
+  };
+  sections: Record<
+    ReferenceKey,
+    {
+      title: string;
+      description: string;
+      entries: ReferenceEntry[];
+    }
+  >;
+};
+
+const REFERENCE_TABS: Array<{ key: ReferenceKey; label: string }> = [
+  { key: 'glossary', label: '용어' },
+  { key: 'people', label: '인물' },
+  { key: 'places', label: '장소' },
+  { key: 'textualNotes', label: '본문' },
+];
 
 const GREEK_BOOK_LABELS = [
   'α',
@@ -149,6 +211,15 @@ export function OdysseyReader({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [activeParagraph, setActiveParagraph] = useState(1);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [referenceOpen, setReferenceOpen] = useState(false);
+  const [referenceData, setReferenceData] = useState<ReferenceData | null>(
+    null,
+  );
+  const [referenceLoading, setReferenceLoading] = useState(false);
+  const [referenceError, setReferenceError] = useState('');
+  const [referenceTab, setReferenceTab] =
+    useState<ReferenceKey>('glossary');
+  const [referenceQuery, setReferenceQuery] = useState('');
   const cache = useRef(
     new Map<number, BookData>([[initialBook.book, initialBook]]),
   );
@@ -216,6 +287,28 @@ export function OdysseyReader({
     },
     [basePath],
   );
+
+  const loadReference = useCallback(async () => {
+    if (referenceData || referenceLoading) return;
+    setReferenceLoading(true);
+    setReferenceError('');
+    try {
+      const response = await fetch(
+        `${basePath}/${manifest.reference.path}`.replace(/([^:]\/)\/+/, '$1'),
+      );
+      if (!response.ok) throw new Error('Reference data failed to load');
+      setReferenceData((await response.json()) as ReferenceData);
+    } catch {
+      setReferenceError('읽기 자료를 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+    } finally {
+      setReferenceLoading(false);
+    }
+  }, [basePath, manifest.reference.path, referenceData, referenceLoading]);
+
+  const changeReferenceOpen = (open: boolean) => {
+    setReferenceOpen(open);
+    if (open) void loadReference();
+  };
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem(
@@ -328,6 +421,36 @@ export function OdysseyReader({
     [manifest.books],
   );
 
+  const activeReferenceSection = referenceData?.sections[referenceTab];
+  const referenceEntries = useMemo(() => {
+    const entries = referenceData?.sections[referenceTab].entries ?? [];
+    const query = referenceQuery.trim().toLocaleLowerCase();
+    if (!query) return entries;
+    return entries.filter((entry) =>
+      [
+        entry.nameGreek,
+        entry.nameKo,
+        entry.transliteration,
+        entry.role,
+        entry.kind,
+        entry.title,
+        entry.scope,
+        entry.status,
+        entry.summary,
+        entry.details,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLocaleLowerCase()
+        .includes(query),
+    );
+  }, [referenceData, referenceQuery, referenceTab]);
+
+  const goToReference = (reference: PassageReference) => {
+    setReferenceOpen(false);
+    void loadBook(reference.book, reference.line);
+  };
+
   const toc = (
     <nav aria-label="24권 목차" className="toc-list">
       {bookItems.map((item) => (
@@ -400,6 +523,163 @@ export function OdysseyReader({
               ))}
             </div>
 
+            <Sheet open={referenceOpen} onOpenChange={changeReferenceOpen}>
+              <SheetTrigger
+                render={
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="reference-trigger"
+                    aria-label="용어·인물·장소·본문비평 자료 열기"
+                  />
+                }
+              >
+                <LibraryBig />
+                <span>읽기 자료</span>
+              </SheetTrigger>
+              <SheetContent side="right" className="reference-sheet">
+                <SheetHeader className="reference-header">
+                  <SheetTitle>읽기 자료</SheetTitle>
+                  <SheetDescription>
+                    용어·인물·장소와 판본 쟁점을 현재 읽는 본문에 연결합니다.
+                  </SheetDescription>
+                </SheetHeader>
+
+                <div className="reference-tools">
+                  <div className="reference-tabs" aria-label="읽기 자료 종류">
+                    {REFERENCE_TABS.map((tab) => (
+                      <button
+                        type="button"
+                        key={tab.key}
+                        data-active={referenceTab === tab.key}
+                        onClick={() => setReferenceTab(tab.key)}
+                      >
+                        {tab.label}
+                        <span>{manifest.reference.counts[tab.key]}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <label className="reference-search">
+                    <Search aria-hidden="true" />
+                    <span className="sr-only">읽기 자료 검색</span>
+                    <input
+                      type="search"
+                      value={referenceQuery}
+                      onChange={(event) => setReferenceQuery(event.target.value)}
+                      placeholder="이름이나 설명 검색"
+                    />
+                  </label>
+                </div>
+
+                <div className="reference-body">
+                  {referenceLoading && (
+                    <p className="reference-state">읽기 자료를 불러오는 중…</p>
+                  )}
+                  {referenceError && (
+                    <div className="reference-state">
+                      <p>{referenceError}</p>
+                      <Button size="sm" variant="outline" onClick={() => void loadReference()}>
+                        다시 시도
+                      </Button>
+                    </div>
+                  )}
+                  {activeReferenceSection && (
+                    <>
+                      <div className="reference-intro">
+                        <p>{activeReferenceSection.description}</p>
+                      </div>
+
+                      {referenceTab === 'textualNotes' && referenceData && (
+                        <section className="edition-card" aria-label="데이터 판본">
+                          <span>데이터 판본</span>
+                          <strong>{referenceData.source.edition}</strong>
+                          <code>{referenceData.source.urn}</code>
+                          <dl>
+                            <div>
+                              <dt>commit</dt>
+                              <dd>{referenceData.source.sourceCommit.slice(0, 12)}</dd>
+                            </div>
+                            <div>
+                              <dt>SHA-256</dt>
+                              <dd>{referenceData.source.sourceSha256.slice(0, 16)}…</dd>
+                            </div>
+                          </dl>
+                          <a
+                            href={referenceData.source.licenseUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {referenceData.source.license} <ExternalLink />
+                          </a>
+                        </section>
+                      )}
+
+                      <div className="reference-list">
+                        {referenceEntries.map((entry) => (
+                          <article className="reference-card" key={entry.id}>
+                            {entry.nameGreek && (
+                              <p className="reference-greek" lang="grc">
+                                {entry.nameGreek}
+                              </p>
+                            )}
+                            <h3>{entry.title ?? entry.nameKo}</h3>
+                            <p className="reference-meta">
+                              {[
+                                entry.transliteration,
+                                entry.role,
+                                entry.kind,
+                                entry.scope,
+                                entry.status,
+                              ]
+                                .filter(Boolean)
+                                .join(' · ')}
+                            </p>
+                            <p className="reference-summary">{entry.summary}</p>
+                            {entry.details && (
+                              <p className="reference-details">{entry.details}</p>
+                            )}
+                            {entry.refs.length > 0 && (
+                              <div className="reference-links" aria-label="관련 구절">
+                                {entry.refs.map((reference) => (
+                                  <button
+                                    type="button"
+                                    key={`${entry.id}-${reference.book}-${reference.line}`}
+                                    onClick={() => goToReference(reference)}
+                                  >
+                                    <span>
+                                      {reference.book}.{reference.line}
+                                    </span>
+                                    {reference.label ?? '본문에서 보기'}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                            {entry.sources && entry.sources.length > 0 && (
+                              <div className="reference-sources" aria-label="참고 출처">
+                                {entry.sources.map((source) => (
+                                  <a
+                                    href={source.url}
+                                    key={source.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    {source.label} <ExternalLink />
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                          </article>
+                        ))}
+                        {referenceEntries.length === 0 && (
+                          <p className="reference-state">검색 결과가 없습니다.</p>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
+
             <div className="font-controls">
               <Button
                 variant="ghost"
@@ -447,6 +727,16 @@ export function OdysseyReader({
                   <SheetDescription>읽을 권을 선택하세요.</SheetDescription>
                 </SheetHeader>
                 {toc}
+                <Button
+                  variant="outline"
+                  className="toc-reference-button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    window.setTimeout(() => changeReferenceOpen(true), 120);
+                  }}
+                >
+                  <LibraryBig /> 용어·인물·장소·본문비평
+                </Button>
               </SheetContent>
             </Sheet>
           </div>
@@ -460,6 +750,17 @@ export function OdysseyReader({
             <span>스물네 권</span>
           </div>
           {toc}
+          <button
+            type="button"
+            className="aside-reference-button"
+            onClick={() => changeReferenceOpen(true)}
+          >
+            <LibraryBig />
+            <span>
+              읽기 자료
+              <small>용어 · 인물 · 장소 · 본문</small>
+            </span>
+          </button>
           <p className="source-note">
             A. T. Murray 편집
             <br />

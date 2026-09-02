@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "title": "판본과 본문비평",
+  "description": "현재 사이트가 실제로 수록한 본문과 고대부터 이어진 주요 결말 논쟁을, 판본 사실과 학설을 구분해 기록합니다.",
+  "entries": [
+    {
+      "id": "t-edition",
+      "title": "이 사이트가 고정한 그리스어 판본",
+      "scope": "전 24권",
+      "status": "판본 사실",
+      "summary": "A. T. Murray 편집, 1919년판 《Odyssey》의 Perseus TEI 그리스어 본문을 사용합니다.",
+      "details": "원문 파일은 PerseusDL canonical-greekLit 저장소의 특정 커밋과 SHA-256 해시로 고정했습니다. 사이트를 다시 빌드할 때 파일 해시가 달라지면 실패하므로, 원격 저장소가 바뀌어도 모르는 사이 본문이 교체되지 않습니다. 정확한 커밋·해시는 이 패널의 ‘데이터 판본’과 공개 저장소의 sources/source.json에서 확인할 수 있습니다.",
+      "refs": [{"book":1,"line":1,"label":"고정 본문의 시작"}],
+      "sources": [
+        {"label":"Perseus 판본 목록","url":"https://catalog.perseus.tufts.edu/catalog/urn%3Acts%3AgreekLit%3Atlg0012.tlg002.perseus-grc1"},
+        {"label":"PerseusDL canonical-greekLit","url":"https://github.com/PerseusDL/canonical-greekLit"}
+      ]
+    },
+    {
+      "id": "t-completeness",
+      "title": "행·문단 단위와 무누락 검증",
+      "scope": "12,107행·1,186문단",
+      "status": "편집 원칙",
+      "summary": "TEI의 행을 한 번씩만 재현하고, 원전의 문단 표지를 읽기 단위로 사용합니다.",
+      "details": "각 권의 첫 문단에 더해 TEI의 1,162개 paragraph milestone을 경계로 나누면 1,186개 문단이 됩니다. 빌드는 원문 행의 번호와 문자열을 차례대로 다시 펼쳐 원본과 완전히 같은지 검사합니다. 따라서 번역 문단화 때문에 그리스어 행이 빠지거나 중복되면 배포 전에 실패합니다.",
+      "refs": [{"book":1,"line":1,"label":"첫 행과 첫 읽기 단위"},{"book":24,"line":548,"label":"현전 본문의 마지막 행"}],
+      "sources": [{"label":"고정 TEI 원문","url":"https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/d771ecb5448baeb450d3f9822036555655ca65f3/data/tlg0012/tlg002/tlg0012.tlg002.perseus-grc2.xml"}]
+    },
+    {
+      "id": "t-numbering-gaps",
+      "title": "10.456·16.101·23.49 번호가 보이지 않는 이유",
+      "scope": "행 번호",
+      "status": "판본 사실",
+      "summary": "이 세 번호는 파서가 건너뛴 것이 아니라 고정한 TEI 파일 자체에 해당 번호의 행 요소가 없습니다.",
+      "details": "수록 본문은 각각 10.455에서 10.457, 16.100에서 16.102, 23.48에서 23.50으로 이어집니다. 사이트는 겉보기 좋게 번호를 당겨 붙이거나 빈 그리스어를 만들어 넣지 않고, 판본이 준 인용 체계를 그대로 보존합니다. 빌드도 오직 이 세 공백만 허용합니다.",
+      "refs": [{"book":10,"line":455,"label":"다음 번호는 457"},{"book":16,"line":100,"label":"다음 번호는 102"},{"book":23,"line":48,"label":"다음 번호는 50"}],
+      "sources": [{"label":"고정 TEI 원문","url":"https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/d771ecb5448baeb450d3f9822036555655ca65f3/data/tlg0012/tlg002/tlg0012.tlg002.perseus-grc2.xml"}]
+    },
+    {
+      "id": "t-end-23-296",
+      "title": "23.296을 ‘끝’으로 본 고대 편집자들",
+      "scope": "23.296 이후",
+      "status": "고대 본문비평의 증언",
+      "summary": "호메로스 주석 전승은 비잔티온의 아리스토파네스와 아리스타르코스가 23.296을 《오디세이아》의 끝으로 보았다고 전합니다.",
+      "details": "이 증언을 곧바로 ‘그 뒤 전부가 위작’이라는 확정 판정으로 읽어서는 안 됩니다. 두 편집자가 뒤의 행들을 자기들이 다루는 기본 본문에 남겨 두었다는 증거도 있기 때문입니다. 이 사이트는 현전 24권을 모두 제시하고, 고대의 종결점 판단은 삭제 명령이 아니라 본문비평 정보로 표시합니다.",
+      "refs": [{"book":23,"line":296,"label":"고대 주석이 전하는 종결점"},{"book":23,"line":297,"label":"논쟁 대상이 되는 이후 본문"}],
+      "sources": [
+        {"label":"CHS, Odyssey Rhapsody 23 주석","url":"https://classical-inquiries.chs.harvard.edu/a-sampling-of-comments-on-odyssey-rhapsody-23/"},
+        {"label":"CHS, 고대 도서관과 편집의 사례","url":"https://classical-inquiries.chs.harvard.edu/the-libraries-of-alexandria-and-pergamon-as-classical-models/"}
+      ]
+    },
+    {
+      "id": "t-athetesis-23",
+      "title": "아리스타르코스가 의심 표시를 한 23.310–343",
+      "scope": "23.310–343",
+      "status": "고대 아테테시스",
+      "summary": "고대 주석에 따르면 아리스타르코스는 오디세우스가 페넬로페에게 모험을 요약하는 이 행들을 아테테시스했습니다.",
+      "details": "아테테시스는 행을 원고에서 없애 버리는 것과 같지 않습니다. 편집자가 진정성이나 현재 위치를 의심한다는 기호를 붙이면서도 기본 본문에는 보존할 수 있었습니다. 그래서 이 사이트도 해당 요약을 23권 본문과 번역에 그대로 두고 논쟁 사실만 알립니다.",
+      "refs": [{"book":23,"line":310,"label":"모험 회고가 시작됨"},{"book":23,"line":343,"label":"회고가 끝나고 잠듦"}],
+      "sources": [{"label":"CHS, Odyssey Rhapsody 23 주석","url":"https://classical-inquiries.chs.harvard.edu/a-sampling-of-comments-on-odyssey-rhapsody-23/"}]
+    },
+    {
+      "id": "t-book-24-debate",
+      "title": "제24권과 ‘두 번째 네퀴아’의 성립 논쟁",
+      "scope": "24.1–204와 마지막 장면",
+      "status": "해결되지 않은 학술 논쟁",
+      "summary": "구혼자들의 혼이 저승으로 가는 두 번째 네퀴아와 친족들의 최종 충돌은 오랫동안 후대 첨가 여부가 논쟁되어 왔습니다.",
+      "details": "학자들의 결론은 하나가 아닙니다. 예를 들어 Douglas Frame은 두 번째 네퀴아가 원래 서사에 속하지만 현전하는 최종 전투 장면은 후대에 재형성되었다고 논증합니다. 다른 분석은 제24권 전체 또는 23.296 이후를 의심하고, 반대로 현전 결말의 구조적 필연성을 강조하는 연구도 있습니다. 사이트는 특정 학설을 정본 판정으로 채택하지 않고 현전 본문 전체를 제공합니다.",
+      "refs": [{"book":24,"line":1,"label":"두 번째 네퀴아의 시작"},{"book":24,"line":412,"label":"구혼자 친족들의 대응"},{"book":24,"line":545,"label":"현전 결말의 맹약"}],
+      "sources": [
+        {"label":"Douglas Frame, The End of the Odyssey","url":"https://classics-at.chs.harvard.edu/the-end-of-the-odyssey/"},
+        {"label":"CHS, Odyssey Rhapsody 24 주석","url":"https://classical-inquiries.chs.harvard.edu/a-sampling-of-comments-on-odyssey-rhapsody-24/"}
+      ]
+    },
+    {
+      "id": "t-base-text-policy",
+      "title": "논쟁 구절을 다루는 이 사이트의 원칙",
+      "scope": "전체",
+      "status": "편집 원칙",
+      "summary": "정본 판정과 번역을 섞지 않고, 고정한 판본의 모든 행을 먼저 보존합니다.",
+      "details": "아테테시스되었거나 후대층으로 의심받는 구절도 Murray–Perseus 기본 본문에 있으면 그리스어와 한국어를 모두 싣습니다. 논쟁은 별도 주석에서 ‘누가 무엇을 주장했는가’로 밝히며, 번역문을 매끈하게 만들려고 행을 옮기거나 삭제하지 않습니다. 새 판본으로 교체할 때는 기존 해시를 덮어쓰지 않고 명시적인 판본 변경으로 처리해야 합니다.",
+      "refs": [{"book":23,"line":296,"label":"첫 결말 논쟁의 경계"},{"book":24,"line":548,"label":"사이트가 보존한 현전 마지막 행"}],
+      "sources": [
+        {"label":"CHS, Odyssey Rhapsody 23 주석","url":"https://classical-inquiries.chs.harvard.edu/a-sampling-of-comments-on-odyssey-rhapsody-23/"},
+        {"label":"PerseusDL canonical-greekLit","url":"https://github.com/PerseusDL/canonical-greekLit"}
+      ]
+    }
+  ]
+}

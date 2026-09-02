@@ -32,6 +32,7 @@ def main():
 
     required = [
         CLIENT_ROOT / "data" / "manifest.json",
+        CLIENT_ROOT / "data" / "reference.json",
         CLIENT_ROOT / "data" / "books" / "01.json",
         CLIENT_ROOT / "og.png",
     ]

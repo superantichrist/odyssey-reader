@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "title": "핵심 용어",
+  "description": "번역 하나로 닫히지 않는 호메로스의 반복 어휘를 대표 구절과 함께 정리합니다.",
+  "entries": [
+    {
+      "id": "g-metis",
+      "nameGreek": "μῆτις",
+      "nameKo": "지략·꾀",
+      "transliteration": "mêtis",
+      "summary": "힘만으로 돌파하지 않고 상황을 읽어 우회하고 속이며 때를 고르는 실천적 지성입니다. 오디세우스의 정체성을 이루며 텔레마코스에게도 이어집니다.",
+      "refs": [{"book": 2, "line": 279, "label": "오디세우스의 지략을 닮은 텔레마코스"}]
+    },
+    {
+      "id": "g-nostos",
+      "nameGreek": "νόστος",
+      "nameKo": "귀향",
+      "transliteration": "nóstos",
+      "summary": "단순한 이동이 아니라 전쟁에서 살아 돌아와 집·이름·지위를 되찾는 전 과정입니다. 작품 전체를 밀어가는 중심 목표입니다.",
+      "refs": [{"book": 1, "line": 5, "label": "자신과 동료들의 귀향"}]
+    },
+    {
+      "id": "g-xenia",
+      "nameGreek": "ξενίη",
+      "nameKo": "손님 우정·환대 규범",
+      "transliteration": "xeiníē",
+      "summary": "낯선 이를 맞아 음식과 보호를 베풀고, 떠날 때 선물을 주며 지속적인 관계를 맺는 규범입니다. 이를 지키거나 짓밟는 일이 인물의 됨됨이를 가릅니다.",
+      "refs": [{"book": 14, "line": 158, "label": "제우스와 손님 식탁을 증인으로 삼는 맹세"}]
+    },
+    {
+      "id": "g-kleos",
+      "nameGreek": "κλέος",
+      "nameKo": "명성·전해지는 이름",
+      "transliteration": "kléos",
+      "summary": "사람들 사이에서 말과 노래로 전해지는 명예입니다. 영웅의 행위는 죽음 뒤에도 남는 이름을 목표로 합니다.",
+      "refs": [{"book": 1, "line": 95, "label": "텔레마코스가 사람들 사이에서 얻을 명성"}]
+    },
+    {
+      "id": "g-moira",
+      "nameGreek": "μοῖρα",
+      "nameKo": "몫·운명",
+      "transliteration": "moîra",
+      "summary": "사람과 신에게 배당된 몫, 특히 피할 수 없는 죽음의 몫을 뜻합니다. 맹목적 숙명이라기보다 각 존재에게 정해진 한계와 질서에 가깝습니다.",
+      "refs": [{"book": 2, "line": 100, "label": "라에르테스를 쓰러뜨릴 죽음의 운명"}]
+    },
+    {
+      "id": "g-hybris",
+      "nameGreek": "ὕβρις",
+      "nameKo": "오만한 폭력",
+      "transliteration": "hýbris",
+      "summary": "자기 힘을 믿고 타인의 집·몸·명예와 신적 질서를 침범하는 넘침입니다. 구혼자들의 지속적인 약탈과 모욕을 규정하는 핵심어입니다.",
+      "refs": [{"book": 1, "line": 368, "label": "구혼자들의 도를 넘은 오만"}]
+    },
+    {
+      "id": "g-aidos",
+      "nameGreek": "αἰδώς",
+      "nameKo": "부끄러움·경외",
+      "transliteration": "aidṓs",
+      "summary": "윗사람과 공동체의 시선을 의식해 자신을 억제하는 수치심이자 존중입니다. 상황에 따라 덕이 되기도 하고 행동을 막는 주저함이 되기도 합니다.",
+      "refs": [{"book": 3, "line": 14, "label": "아테나가 텔레마코스에게 부끄러움을 거두라 명함"}]
+    },
+    {
+      "id": "g-oikos",
+      "nameGreek": "οἶκος",
+      "nameKo": "집·가문·재산 공동체",
+      "transliteration": "oîkos",
+      "summary": "건물만이 아니라 가족, 노예, 토지, 가축, 재산과 통치의 연속성을 묶는 단위입니다. 오디세우스의 귀향은 오이코스를 다시 장악하는 일입니다.",
+      "refs": [{"book": 1, "line": 232, "label": "한때 부유하고 흠 없던 집"}]
+    },
+    {
+      "id": "g-arete",
+      "nameGreek": "ἀρετή",
+      "nameKo": "탁월함·훌륭함",
+      "transliteration": "aretḗ",
+      "summary": "도덕적 선함 하나가 아니라 신분과 역할에 맞게 뛰어난 능력을 발휘하는 상태입니다. 힘, 지략, 통치, 말, 살림의 솜씨 모두에 쓰입니다.",
+      "refs": [{"book": 2, "line": 206, "label": "페넬로페의 탁월함을 두고 다투는 구혼자들"}]
+    },
+    {
+      "id": "g-time",
+      "nameGreek": "τιμή",
+      "nameKo": "명예·몫으로 인정받는 지위",
+      "transliteration": "timḗ",
+      "summary": "공동체가 재산, 자리, 선물과 존중으로 가시화해 주는 명예입니다. 왕권과 집의 주인 자격도 이 말의 영역에 들어갑니다.",
+      "refs": [{"book": 1, "line": 117, "label": "오레스테스가 차지할 명예와 집"}]
+    },
+    {
+      "id": "g-hiketes",
+      "nameGreek": "ἱκέτης",
+      "nameKo": "탄원자",
+      "transliteration": "hikétēs",
+      "summary": "무릎을 잡거나 화덕·제단에 앉아 보호를 청하는 사람입니다. 탄원자를 해치는 일은 제우스가 지키는 규범을 침범합니다.",
+      "refs": [{"book": 5, "line": 450, "label": "강의 신에게 탄원하는 오디세우스"}]
+    },
+    {
+      "id": "g-hecatomb",
+      "nameGreek": "ἑκατόμβη",
+      "nameKo": "백우제·대규모 희생제",
+      "transliteration": "hekatómbē",
+      "summary": "글자대로라면 소 백 마리의 제사지만, 서사에서는 많은 가축을 바치는 성대한 희생제 전반을 가리킬 수 있습니다.",
+      "refs": [{"book": 1, "line": 25, "label": "포세이돈을 위한 황소와 숫양의 백우제"}]
+    },
+    {
+      "id": "g-aoidos",
+      "nameGreek": "ἀοιδός",
+      "nameKo": "가객",
+      "transliteration": "aoidós",
+      "summary": "신과 영웅의 일을 기억해 즉석에서 노래하는 전문 공연자입니다. 데모도코스와 페미오스의 노래는 작품 안에서 영웅 서사가 생겨나는 모습을 보여 줍니다.",
+      "refs": [{"book": 8, "line": 44, "label": "신에게 노래 재능을 받은 데모도코스"}]
+    },
+    {
+      "id": "g-dmos",
+      "nameGreek": "δμώς·δμῳή",
+      "nameKo": "남자·여자 노예",
+      "transliteration": "dmṓs · dmōḗ",
+      "summary": "집의 노동과 재산 체계에 예속된 사람을 가리킵니다. 이 번역은 ‘시종’만으로 흐리지 않고 원문의 신분이 분명할 때 ‘노예’라고 옮깁니다.",
+      "refs": [{"book": 1, "line": 147, "label": "구혼자들에게 빵을 나르는 여자 노예들"}]
+    },
+    {
+      "id": "g-ate",
+      "nameGreek": "ἄτη",
+      "nameKo": "미망·파멸로 이끄는 눈멂",
+      "transliteration": "átē",
+      "summary": "판단을 흐려 잘못된 행위로 몰고 가는 힘과 그 행위가 낳은 파멸을 함께 뜻합니다. 책임을 지워 버리는 변명이 아니라 파국이 작동하는 방식을 나타냅니다.",
+      "refs": [{"book": 23, "line": 223, "label": "페넬로페가 헬레네의 미망을 말함"}]
+    },
+    {
+      "id": "g-nemesis",
+      "nameGreek": "νέμεσις·νεμεσάω",
+      "nameKo": "의분·마땅한 비난",
+      "transliteration": "némesis · nemesáō",
+      "summary": "규범을 넘은 행위를 보고 느끼는 의분과 그에 따른 사회적 비난입니다. 후대의 추상적 ‘복수의 여신’보다 넓은 일상적 용법을 지닙니다.",
+      "refs": [{"book": 1, "line": 119, "label": "손님을 문밖에 세워 둔 일을 부끄러워하는 텔레마코스"}]
+    },
+    {
+      "id": "g-ker",
+      "nameGreek": "κῆρ",
+      "nameKo": "죽음의 운명",
+      "transliteration": "kḗr",
+      "summary": "개인을 덮치는 죽음 또는 죽음을 가져오는 파멸의 힘입니다. ‘검은 케르’라는 정형구로 자주 나타납니다.",
+      "refs": [{"book": 2, "line": 165, "label": "구혼자들 가까이에 죽음의 운명을 심음"}]
+    },
+    {
+      "id": "g-thymos",
+      "nameGreek": "θυμός",
+      "nameKo": "마음·기개·생명의 충동",
+      "transliteration": "thymós",
+      "summary": "생각하고 욕망하고 분노하며 낙담하는 내적 기관이자 생명력입니다. 문맥에 따라 마음, 가슴, 기개로 달리 옮깁니다.",
+      "refs": [{"book": 1, "line": 4, "label": "바다에서 마음으로 겪은 고통"}]
+    },
+    {
+      "id": "g-oinops",
+      "nameGreek": "οἶνοψ πόντος",
+      "nameKo": "포도주 빛 바다",
+      "transliteration": "oînops póntos",
+      "summary": "바다에 반복해 붙는 호메로스식 수식어입니다. 정확한 색채 하나보다 어둡고 번들거리며 깊은 표면의 인상을 불러냅니다.",
+      "refs": [{"book": 1, "line": 183, "label": "낯선 말을 쓰는 사람들에게 가는 포도주 빛 바다"}]
+    },
+    {
+      "id": "g-phemis",
+      "nameGreek": "φήμη·φάτις",
+      "nameKo": "소문·신호가 된 말",
+      "transliteration": "phḗmē · phátis",
+      "summary": "사람들 사이에 퍼지는 말이면서, 기도 직후 우연히 들려 신의 응답으로 받아들여지는 말이기도 합니다.",
+      "refs": [{"book": 20, "line": 100, "label": "오디세우스가 제우스에게 말의 징조를 청함"}]
+    }
+  ]
+}

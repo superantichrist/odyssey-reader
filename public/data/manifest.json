@@ -229,5 +229,14 @@
       "translationCount": 56,
       "lineNumberGaps": []
     }
-  ]
+  ],
+  "reference": {
+    "path": "data/reference.json",
+    "counts": {
+      "glossary": 20,
+      "people": 32,
+      "places": 20,
+      "textualNotes": 7
+    }
+  }
 }

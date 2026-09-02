@@ -16,7 +16,19 @@ SOURCE_META_PATH = ROOT / "sources" / "source.json"
 OUTPUT_ROOT = ROOT / "public" / "data"
 BOOKS_ROOT = OUTPUT_ROOT / "books"
 TRANSLATION_ROOT = ROOT / "translations" / "ko"
+REFERENCE_ROOT = ROOT / "references"
 TEI = "{http://www.tei-c.org/ns/1.0}"
+
+REFERENCE_SECTIONS = {
+    "glossary": {"file": "glossary.json", "minimum": 15, "titleField": "nameKo"},
+    "people": {"file": "people.json", "minimum": 20, "titleField": "nameKo"},
+    "places": {"file": "places.json", "minimum": 15, "titleField": "nameKo"},
+    "textualNotes": {
+        "file": "textual-notes.json",
+        "minimum": 5,
+        "titleField": "title",
+    },
+}
 
 EXPECTED_BOOKS = 24
 EXPECTED_LINES = 12107
@@ -67,6 +79,88 @@ def find_numeric_gaps(values):
         return []
     present = set(values)
     return [number for number in range(values[0], values[-1] + 1) if number not in present]
+
+
+def load_reference_data(books, source_meta):
+    """Validate editorial reference files and combine them for the static reader."""
+    available_lines = {
+        book["book"]: {
+            line["line"]
+            for paragraph in book["paragraphs"]
+            for line in paragraph["greekLines"]
+        }
+        for book in books
+    }
+    sections = {}
+    all_ids = set()
+
+    for section_key, config in REFERENCE_SECTIONS.items():
+        path = REFERENCE_ROOT / config["file"]
+        payload = read_json(path)
+        entries = payload.get("entries")
+        if payload.get("schemaVersion") != 1 or not isinstance(entries, list):
+            raise ValueError("Malformed reference section: {}".format(path))
+        if len(entries) < config["minimum"]:
+            raise ValueError(
+                "Reference section {} must contain at least {} entries".format(
+                    section_key, config["minimum"]
+                )
+            )
+
+        for entry in entries:
+            entry_id = entry.get("id") if isinstance(entry, dict) else None
+            title = entry.get(config["titleField"]) if isinstance(entry, dict) else None
+            if not entry_id or not title or not entry.get("summary"):
+                raise ValueError("Malformed reference entry in {}".format(path))
+            if entry_id in all_ids:
+                raise ValueError("Duplicate reference ID: {}".format(entry_id))
+            all_ids.add(entry_id)
+
+            refs = entry.get("refs", [])
+            if not isinstance(refs, list):
+                raise ValueError("Reference refs must be a list: {}".format(entry_id))
+            for ref in refs:
+                book_number = ref.get("book") if isinstance(ref, dict) else None
+                line_number = ref.get("line") if isinstance(ref, dict) else None
+                if (
+                    book_number not in available_lines
+                    or line_number not in available_lines[book_number]
+                ):
+                    raise ValueError(
+                        "Unknown passage reference in {}: {}.{}".format(
+                            entry_id, book_number, line_number
+                        )
+                    )
+
+            sources = entry.get("sources", [])
+            if not isinstance(sources, list):
+                raise ValueError("Reference sources must be a list: {}".format(entry_id))
+            for source in sources:
+                if (
+                    not isinstance(source, dict)
+                    or not source.get("label")
+                    or not str(source.get("url", "")).startswith("https://")
+                ):
+                    raise ValueError("Malformed reference source in {}".format(entry_id))
+
+        sections[section_key] = {
+            "title": payload.get("title", section_key),
+            "description": payload.get("description", ""),
+            "entries": entries,
+        }
+
+    return {
+        "schemaVersion": 1,
+        "source": {
+            "edition": source_meta["edition"],
+            "urn": source_meta["urn"],
+            "sourceCommit": source_meta["sourceCommit"],
+            "sourceSha256": source_meta["sourceSha256"],
+            "license": source_meta["license"],
+            "licenseUrl": source_meta["licenseUrl"],
+        },
+        "sections": sections,
+    }
 
 
 def parse_source(source_path):
@@ -286,6 +380,7 @@ def main():
     source_hash = hashlib.sha256(source_bytes).hexdigest()
     books, marker_count = parse_source(source_path)
     stats = validate(books, marker_count, source_hash, source_meta["sourceSha256"])
+    reference_data = load_reference_data(books, source_meta)
 
     if BOOKS_ROOT.exists():
         shutil.rmtree(str(BOOKS_ROOT))
@@ -308,6 +403,8 @@ def main():
             }
         )
 
+    write_json(OUTPUT_ROOT / "reference.json", reference_data)
+
     manifest = {
         "work": "odyssey",
         "workTitleGreek": source_meta["workTitleGr"],
@@ -327,6 +424,13 @@ def main():
         },
         "stats": stats,
         "books": manifest_books,
+        "reference": {
+            "path": "data/reference.json",
+            "counts": {
+                key: len(section["entries"])
+                for key, section in reference_data["sections"].items()
+            },
+        },
     }
     write_json(OUTPUT_ROOT / "manifest.json", manifest)
     print(json.dumps(stats, ensure_ascii=False, indent=2))
