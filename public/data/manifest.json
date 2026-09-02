@@ -17,7 +17,7 @@
     "lines": 12107,
     "paragraphs": 1186,
     "paragraphMarkers": 1162,
-    "translatedParagraphs": 390,
+    "translatedParagraphs": 450,
     "lineNumberGaps": {
       "10": [
         456
@@ -108,7 +108,7 @@
       "path": "data/books/10.json",
       "lineCount": 573,
       "paragraphCount": 60,
-      "translationCount": 0,
+      "translationCount": 60,
       "lineNumberGaps": [
         456
       ]
