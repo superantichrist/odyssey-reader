@@ -232,6 +232,10 @@ a {
   display: none;
 }
 
+.mobile-translation-toggle {
+  display: none;
+}
+
 .reader-layout {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
@@ -862,6 +866,13 @@ a {
 
   .mobile-menu {
     display: inline-flex;
+  }
+
+  .mobile-translation-toggle {
+    display: inline-flex;
+    min-width: 54px;
+    padding-inline: 0.55rem;
+    font-size: 0.68rem;
   }
 
   .reference-trigger {

@@ -700,6 +700,23 @@ export function OdysseyReader({
             </div>
 
             <Button
+              variant={viewMode === 'korean' ? 'default' : 'outline'}
+              size="sm"
+              className="mobile-translation-toggle"
+              aria-pressed={viewMode === 'korean'}
+              aria-label={
+                viewMode === 'korean'
+                  ? '원문과 직역 함께 보기'
+                  : '직역만 보기'
+              }
+              onClick={() =>
+                changeViewMode(viewMode === 'korean' ? 'parallel' : 'korean')
+              }
+            >
+              직역만
+            </Button>
+
+            <Button
               variant="ghost"
               size="icon"
               onClick={() => setDark((value) => !value)}
